@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+tensorflow
+torch
+pytorch-tabnet
+joblib
+flask
+flask-cors
+
