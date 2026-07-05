@@ -8,6 +8,7 @@ TabNet Regressor for Heart Disease Risk Score Prediction
 
 import joblib
 import numpy as np
+import torch
 
 from pytorch_tabnet.tab_model import TabNetRegressor
 
@@ -34,25 +35,18 @@ def build_model():
     set_seed()
 
     model = TabNetRegressor(
-
         n_d=TABNET_CONFIG["n_d"],
-
         n_a=TABNET_CONFIG["n_a"],
-
         n_steps=TABNET_CONFIG["n_steps"],
-
         gamma=TABNET_CONFIG["gamma"],
-
         lambda_sparse=TABNET_CONFIG["lambda_sparse"],
 
-        optimizer_params=dict(
+        optimizer_fn=torch.optim.Adam,
+        optimizer_params=dict(lr=TABNET_CONFIG["optimizer_lr"]),
 
-            lr=TABNET_CONFIG["optimizer_lr"]
-
-        ),
+        mask_type="entmax",
 
         verbose=1
-
     )
 
     log("TabNet model created.")
@@ -83,6 +77,7 @@ def train_model(
                 np.asarray(y_valid, dtype=np.float32).reshape(-1,1)
             )
         ],
+        eval_metric=["rmse"],
 
         max_epochs=TABNET_CONFIG["max_epochs"],
         patience=TABNET_CONFIG["patience"],
@@ -244,4 +239,3 @@ def train_pipeline(
     log("=" * 60)
 
     return model, history
-
