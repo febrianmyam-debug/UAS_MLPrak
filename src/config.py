@@ -111,29 +111,17 @@ MLP_CONFIG = {
 # =========================================================
 
 TABNET_CONFIG = {
-
-    "n_d": 32,
-
-    "n_a": 32,
-
-    "n_steps": 5,
-
-    "gamma": 1.5,
-
+    "n_d": 16,
+    "n_a": 16,
+    "n_steps": 3,
+    "gamma": 1.3,
     "lambda_sparse": 1e-4,
-
-    "optimizer_lr": 2e-2,
-
-    "max_epochs": 150,
-
-    "patience": 20,
-
-    "batch_size": 256,
-
-    "virtual_batch_size": 128
-
+    "optimizer_lr": 0.001,
+    "max_epochs": 200,
+    "patience": 30,
+    "batch_size": 32,
+    "virtual_batch_size": 16
 }
-
 # =========================================================
 # EVALUATION METRICS
 # =========================================================
